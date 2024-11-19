@@ -1,0 +1,39 @@
+<div class="min-h-screen bg-gray-100 flex items-start justify-center p-5">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
+      <!-- Header -->
+      <h2 class="text-2xl font-bold text-gray-800 mb-5">To-Do List</h2>
+      
+      <!-- Input Section -->
+      <div class="flex items-center mb-4">
+        <input 
+          type="text" 
+          #todoInput
+          placeholder="Add a new task..." 
+          class="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring focus:ring-indigo-200"
+        />
+        <button 
+          (click)="addTask(todoInput.value); todoInput.value = ''"
+          class="bg-indigo-500 text-white px-4 py-2 rounded-r-lg hover:bg-indigo-600 transition duration-200"
+        >
+          Add
+        </button>
+      </div>
+  
+      <!-- To-Do List -->
+      <ul class="space-y-3">
+        <li 
+          class="flex items-center justify-between bg-gray-50 px-4 py-3 rounded-lg shadow-sm" 
+          *ngFor="let todo of todos; let i = index"
+        >
+          <span class="text-gray-800">{{ todo }}</span>
+          <button 
+            (click)="deleteTask(i)"
+            class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition duration-200"
+          >
+            Delete
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
