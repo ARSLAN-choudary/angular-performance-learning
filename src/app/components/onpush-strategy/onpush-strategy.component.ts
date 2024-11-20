@@ -1,7 +1,6 @@
 import { NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
 } from '@angular/core';
 
@@ -16,15 +15,30 @@ import {
 export class OnpushStrategyComponent {
   todos: string[] = [];
 
-  constructor(private cdr: ChangeDetectorRef) {}
-
+  /**
+   * Adds a new task to the to-do list.
+   * @param task - The task to be added.
+   */
   addTask(task: string): void {
-    if (task.trim()) {
-      this.todos = [...this.todos, task.trim()];
+    const trimmedTask = task.trim();
+    if (trimmedTask) {
+      this.todos.push(trimmedTask);
     }
   }
 
+  /**
+   * Deletes a task from the to-do list.
+   * @param index - The index of the task to be removed.
+   */
   deleteTask(index: number): void {
     this.todos.splice(index, 1);
+  }
+
+  /**
+   * Tracks items by their index to optimize rendering.
+   * @param index - The index of the current item.
+   */
+  trackByIndex(index: number): number {
+    return index;
   }
 }
