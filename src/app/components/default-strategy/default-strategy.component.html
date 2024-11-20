@@ -1,95 +1,92 @@
-<div class=" bg-gray-100 p-8">
-    <div class="bg-white p-3 max-w-md mx-auto">
-      <div class="text-center">
-        <h1 class="text-3xl font-bold">ToDo App</h1>
-        <div class="mt-4 flex">
-          <input
-            #todoInput
-            class="w-80 border-b-2 border-gray-500 text-black"
-            type="text"
-            placeholder="Enter your task here"
-          />
-          <button
-            class="ml-2 border-2 border-green-500 p-2 text-green-500 hover:text-white hover:bg-green-500 rounded-lg flex"
-            (click)="addTodo(todoInput.value); todoInput.value = ''"
-          >
-            <svg
-              class="h-6 w-6"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <circle cx="12" cy="12" r="9" />
-              <line x1="9" y1="12" x2="15" y2="12" />
-              <line x1="12" y1="9" x2="12" y2="15" />
-            </svg>
-            <span>Add</span>
-          </button>
-        </div>
-      </div>
-  
-      <div class="mt-8">
-        <ul>
-          <li
-            class="p-2 rounded-lg"
-            *ngFor="let todo of todos; let i = index"
-          >
-            <div class="flex align-middle flex-row justify-between">
-              <div class="p-2">
-                <input
-                  type="checkbox"
-                  class="h-6 w-6"
-                  [(ngModel)]="todo.completed"
-                />
-              </div>
-              <div class="p-2">
-                <p class="text-lg text-black">{{ todo.task }}</p>
-              </div>
-              <button
-                class="flex text-red-500 border-2 border-red-500 p-2 rounded-lg"
-                (click)="removeTodo(i)"
-              >
-                <svg
-                  class="h-6 w-6 text-red-500"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="15" y1="9" x2="9" y2="15" />
-                  <line x1="9" y1="9" x2="15" y2="15" />
-                </svg>
-                <span>Remove</span>
-              </button>
-            </div>
-            <hr class="mt-2" />
-          </li>
-        </ul>
-      </div>
-  
-      <div class="mt-8">
+<div class="bg-gray-100 p-8">
+  <div class="bg-white p-6 max-w-md mx-auto rounded-lg shadow-md">
+    <div class="text-center">
+      <h1 class="text-3xl font-bold text-gray-800">ToDo App</h1>
+      <div class="mt-4 flex">
+        <input
+          #todoInput
+          class="flex-1 border-b-2 border-gray-400 text-gray-800 px-2 focus:outline-none focus:border-blue-500"
+          type="text"
+          placeholder="Enter your task here"
+        />
         <button
-          class="border-2 border-red-500 p-2 text-red-500"
-          (click)="clearCompleted()"
+          class="ml-2 border-2 border-green-500 text-green-500 p-2 rounded-lg hover:bg-green-500 hover:text-white flex items-center"
+          (click)="addTodo(todoInput.value); todoInput.value = ''"
         >
-          Clear Completed Task
-        </button>
-        <button
-          class="border-2 border-indigo-500 p-2 text-indigo-500 ml-4"
-          (click)="resetTodos()"
-        >
-          Reset Todo List
+          <svg
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="9" y1="12" x2="15" y2="12" />
+            <line x1="12" y1="9" x2="12" y2="15" />
+          </svg>
+          <span class="ml-1">Add</span>
         </button>
       </div>
     </div>
+
+    <div class="mt-8">
+      <ul>
+        <li
+          class="flex justify-between items-center p-2 bg-gray-50 rounded-lg mb-2"
+          *ngFor="let todo of todos; let i = index"
+        >
+          <div class="flex items-center">
+            <input
+              type="checkbox"
+              class="h-5 w-5 text-green-500 focus:ring focus:ring-green-300"
+              [(ngModel)]="todo.completed"
+            />
+            <p
+              class="ml-3 text-lg text-gray-800 line-through"
+              [class.line-through]="todo.completed"
+            >
+              {{ todo.task }}
+            </p>
+          </div>
+          <button
+            class="flex items-center text-red-500 border-2 border-red-500 p-2 rounded-lg hover:bg-red-500 hover:text-white"
+            (click)="removeTodo(i)"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="15" y1="9" x2="9" y2="15" />
+              <line x1="9" y1="9" x2="15" y2="15" />
+            </svg>
+            <span class="ml-1">Remove</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-8 flex justify-between">
+      <button
+        class="border-2 border-red-500 text-red-500 px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white"
+        (click)="clearCompleted()"
+      >
+        Clear Completed
+      </button>
+      <button
+        class="border-2 border-indigo-500 text-indigo-500 px-4 py-2 rounded-lg hover:bg-indigo-500 hover:text-white"
+        (click)="resetTodos()"
+      >
+        Reset List
+      </button>
+    </div>
   </div>
-  
+</div>
